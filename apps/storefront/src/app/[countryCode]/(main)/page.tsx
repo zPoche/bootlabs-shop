@@ -18,24 +18,30 @@ export default async function Home(props: {
 
   const { countryCode } = params
 
-  const region = await getRegion(countryCode)
+  let region = null
+  let collections: Awaited<ReturnType<typeof listCollections>>["collections"] =
+    []
 
-  const { collections } = await listCollections({
-    fields: "id, handle, title",
-  })
-
-  if (!collections || !region) {
-    return null
+  try {
+    region = await getRegion(countryCode)
+    const listed = await listCollections({
+      fields: "id, handle, title",
+    })
+    collections = listed.collections
+  } catch {
+    // Phase 0: Medusa may have no region, catalog, or publishable key yet.
   }
 
   return (
     <>
       <Hero />
-      <div className="py-12">
-        <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
-      </div>
+      {region && collections.length > 0 ? (
+        <div className="py-12">
+          <ul className="flex flex-col gap-x-6">
+            <FeaturedProducts collections={collections} region={region} />
+          </ul>
+        </div>
+      ) : null}
     </>
   )
 }

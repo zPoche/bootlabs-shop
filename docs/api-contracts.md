@@ -33,6 +33,8 @@
 }
 ```
 
+`GET /store/health` und alle übrigen `/store/*`-Routen verlangen den Medusa-Header `x-publishable-api-key`. Compose-Healthchecks nutzen `GET /health` und `GET /api/health`, die ohne Key antworten.
+
 Store- und Admin-APIs von Medusa (`/store/*`, `/admin/*`) sind über die Dependency verfügbar, sobald die Datenbank migriert ist. Sie werden in Phase 0 nicht um Bootlabs-Katalogdaten erweitert.
 
 ## Geplant Phase 1
