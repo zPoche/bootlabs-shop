@@ -1,6 +1,12 @@
-MIT License
+Except for the Enterprise Edition materials identified in
+ENTERPRISE-LICENSE.md, the repository is licensed under the MIT License below.
+The Enterprise Edition materials are not licensed under the MIT License and
+are governed by ENTERPRISE-LICENSE.md and, where applicable, a separate
+commercial agreement with MedusaJS, Inc.
 
-Copyright (c) 2026 Bootlabs
+The MIT License (MIT)
+
+Copyright (c) 2021 Medusajs
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,13 +25,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-This repository previously originated as a GitHub fork of Medusa
-(https://github.com/medusajs/medusa). Bootlabs application code is licensed
-under the MIT License above.
-
-Third-party Medusa packages consumed via npm remain under their own licenses.
-Historical Medusa license texts that applied to the removed core-fork sources
-are preserved in `docs/licenses/`.

@@ -1,0 +1,20 @@
+{
+  "name": "@bootlabs/ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared Bootlabs design tokens and UI primitives",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens.css"
+  },
+  "scripts": {
+    "lint": "echo 'ui: no lint files beyond tokens'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vitest": "^3.2.4"
+  }
+}

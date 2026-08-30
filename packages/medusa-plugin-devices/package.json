@@ -1,0 +1,20 @@
+{
+  "name": "@bootlabs/medusa-plugin-devices",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Device registry, serial numbers and condition logs (Phase 3)",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "keywords": ["medusa-plugin", "bootlabs", "devices"],
+  "scripts": {
+    "lint": "echo 'plugin-devices: skeleton'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vitest": "^3.2.4"
+  }
+}
