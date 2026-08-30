@@ -5,6 +5,18 @@ loadEnv(process.env.NODE_ENV || "development", process.cwd())
 const databaseUrl = process.env.DATABASE_URL
 const redisUrl = process.env.REDIS_URL
 
+// Medusa defaults to Secure cookies in production/staging. Over HTTP (local
+// Compose on localhost:9000) browsers then never store the admin session.
+// Set MEDUSA_COOKIE_SECURE=true behind real HTTPS.
+const cookieSecureEnv = process.env.MEDUSA_COOKIE_SECURE
+const cookieOptions =
+  cookieSecureEnv === undefined
+    ? undefined
+    : {
+        secure: cookieSecureEnv === "true",
+        sameSite: "lax" as const,
+      }
+
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl,
@@ -28,6 +40,7 @@ module.exports = defineConfig({
       cookieSecret:
         process.env.COOKIE_SECRET || "change-me-cookie-secret-dev-only",
     },
+    ...(cookieOptions ? { cookieOptions } : {}),
   },
   admin: {
     vite: (config) => ({

@@ -66,6 +66,8 @@ services:
       # Optional one-time admin bootstrap. Set BOTH, then remove the password from .env.
       MEDUSA_ADMIN_EMAIL: ${MEDUSA_ADMIN_EMAIL:-}
       MEDUSA_ADMIN_PASSWORD: ${MEDUSA_ADMIN_PASSWORD:-}
+      # false for local HTTP Compose; set true behind HTTPS.
+      MEDUSA_COOKIE_SECURE: ${MEDUSA_COOKIE_SECURE:-false}
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
       STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY:-}
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}

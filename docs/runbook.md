@@ -66,7 +66,7 @@ Ablauf:
    docker compose -f infra/compose.yaml logs medusa | grep -i 'Admin bootstrap'
    ```
    Erwartet beim ersten Start: `Admin bootstrap created user …`
-4. Login unter [http://localhost:9000/app](http://localhost:9000/app)
+4. Login unter [http://localhost:9000/app](http://localhost:9000/app). Compose setzt `MEDUSA_COOKIE_SECURE=false`, damit Admin-Sessions über HTTP funktionieren. Hinter echtem HTTPS auf `true` stellen.
 5. Bootstrap deaktivieren: `MEDUSA_ADMIN_PASSWORD` aus `.env` entfernen (empfohlen auch `MEDUSA_ADMIN_EMAIL`), dann Container neu starten.
 6. Weitere Starts mit derselben E-Mail loggen `already exists, skipping` und legen keinen zweiten Admin an.
 
@@ -136,6 +136,7 @@ Rollback: vorheriges Image-Tag starten, bei Schema-Änderungen zuerst Module rol
 | Admin leer / Vite-Fehler | Port 5173, nicht `/app` als Docker-WORKDIR verwenden (`/server`) |
 | `medusa user` im Container fehlschlägt | Nicht aus `/server` mit `npx medusa user` starten; Entrypoint-Bootstrap oder `cd /server/apps/backend` nutzen |
 | Admin fehlt nach Compose | Beide `MEDUSA_ADMIN_*` gesetzt? Logs `Admin bootstrap` prüfen |
+| Admin-Login unter HTTP schlägt fehl | `MEDUSA_COOKIE_SECURE=false` für lokales Compose; hinter HTTPS `true` |
 | Storefront 500 | `NEXT_PUBLIC_MEDUSA_BACKEND_URL`, Publishable Key, Regionen in Admin |
 | Compose unhealthy | `docker compose logs`, `curl /health` |
 | pnpm Admin-Build | `.npmrc` Hoist-Patterns nicht entfernen |

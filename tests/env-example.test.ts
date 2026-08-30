@@ -37,7 +37,9 @@ describe("env templates", () => {
     // One-time admin bootstrap placeholders stay commented (no live password).
     expect(root).toMatch(/#\s*MEDUSA_ADMIN_EMAIL=/)
     expect(root).toMatch(/#\s*MEDUSA_ADMIN_PASSWORD=/)
+    expect(root).toMatch(/#\s*MEDUSA_COOKIE_SECURE=/)
     expect(infra).toMatch(/#\s*MEDUSA_ADMIN_EMAIL=/)
     expect(infra).toMatch(/#\s*MEDUSA_ADMIN_PASSWORD=/)
+    expect(infra).toMatch(/#\s*MEDUSA_COOKIE_SECURE=/)
   })
 })
