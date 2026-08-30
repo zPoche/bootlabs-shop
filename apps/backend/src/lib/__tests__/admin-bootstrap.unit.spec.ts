@@ -7,15 +7,13 @@ describe("resolveAdminBootstrapDecision", () => {
     })
   })
 
-  it("skips when only one env var is set", () => {
+  it("treats a missing password as inactive (post-bootstrap deactivation)", () => {
     expect(
       resolveAdminBootstrapDecision({ email: "admin@bootlabs.local" }, false)
-    ).toEqual({
-      action: "skip_partial",
-      present: ["MEDUSA_ADMIN_EMAIL"],
-      missing: ["MEDUSA_ADMIN_PASSWORD"],
-    })
+    ).toEqual({ action: "skip_unset" })
+  })
 
+  it("warns when only the password is set", () => {
     expect(
       resolveAdminBootstrapDecision({ password: "secret" }, false)
     ).toEqual({

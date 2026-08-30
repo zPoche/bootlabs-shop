@@ -45,7 +45,7 @@ export default async function bootstrapAdmin({
   switch (decision.action) {
     case "skip_unset":
       logger.info(
-        "Admin bootstrap inactive (MEDUSA_ADMIN_EMAIL and MEDUSA_ADMIN_PASSWORD unset)."
+        "Admin bootstrap inactive (MEDUSA_ADMIN_PASSWORD unset)."
       )
       return
     case "skip_partial":

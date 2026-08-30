@@ -23,24 +23,19 @@ export function resolveAdminBootstrapDecision(
   const emailSet = email.length > 0
   const passwordSet = password.length > 0
 
-  if (!emailSet && !passwordSet) {
+  // Inactive when the password is absent — that is the supported post-bootstrap
+  // deactivation path (email may remain in .env).
+  if (!passwordSet) {
     return { action: "skip_unset" }
   }
 
-  if (!emailSet || !passwordSet) {
-    const present: string[] = []
-    const missing: string[] = []
-    if (emailSet) {
-      present.push("MEDUSA_ADMIN_EMAIL")
-    } else {
-      missing.push("MEDUSA_ADMIN_EMAIL")
+  // Password without email is a misconfiguration.
+  if (!emailSet) {
+    return {
+      action: "skip_partial",
+      present: ["MEDUSA_ADMIN_PASSWORD"],
+      missing: ["MEDUSA_ADMIN_EMAIL"],
     }
-    if (passwordSet) {
-      present.push("MEDUSA_ADMIN_PASSWORD")
-    } else {
-      missing.push("MEDUSA_ADMIN_PASSWORD")
-    }
-    return { action: "skip_partial", present, missing }
   }
 
   if (userAlreadyExists) {
