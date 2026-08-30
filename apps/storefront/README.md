@@ -10,5 +10,6 @@ Bootlabs overlay in Phase 0 is limited to:
 - hero copy
 - Docker `output: "standalone"`
 - `generateStaticParams` returns `[]` when Medusa or a publishable key is not available yet
+- middleware and catalog fetches fail soft so the starter renders without a seeded catalog
 
 Catalog, checkout, and branding beyond that start in Phase 1.
