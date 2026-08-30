@@ -63,6 +63,9 @@ services:
       AUTH_CORS: ${AUTH_CORS:-http://localhost:9000,http://localhost:5173,http://localhost:8000}
       JWT_SECRET: ${JWT_SECRET:-change-me-jwt-secret-dev-only}
       COOKIE_SECRET: ${COOKIE_SECRET:-change-me-cookie-secret-dev-only}
+      # Optional one-time admin bootstrap. Set BOTH, then remove the password from .env.
+      MEDUSA_ADMIN_EMAIL: ${MEDUSA_ADMIN_EMAIL:-}
+      MEDUSA_ADMIN_PASSWORD: ${MEDUSA_ADMIN_PASSWORD:-}
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
       STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY:-}
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}

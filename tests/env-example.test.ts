@@ -33,5 +33,11 @@ describe("env templates", () => {
 
     expect(root).not.toMatch(/sk_live_|pk_live_|whsec_[A-Za-z0-9]{10,}/)
     expect(root).not.toMatch(/sk_test_[A-Za-z0-9]{10,}/)
+
+    // One-time admin bootstrap placeholders stay commented (no live password).
+    expect(root).toMatch(/#\s*MEDUSA_ADMIN_EMAIL=/)
+    expect(root).toMatch(/#\s*MEDUSA_ADMIN_PASSWORD=/)
+    expect(infra).toMatch(/#\s*MEDUSA_ADMIN_EMAIL=/)
+    expect(infra).toMatch(/#\s*MEDUSA_ADMIN_PASSWORD=/)
   })
 })

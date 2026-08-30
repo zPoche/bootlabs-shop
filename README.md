@@ -54,7 +54,7 @@ Medusa: [http://localhost:9000](http://localhost:9000)
 Admin: [http://localhost:9000/app](http://localhost:9000/app)  
 Storefront: [http://localhost:8000](http://localhost:8000)
 
-Admin-User anlegen:
+Admin-User lokal anlegen:
 
 ```bash
 pnpm --filter @bootlabs/backend user -- -e admin@bootlabs.local -p change-me
@@ -62,11 +62,27 @@ pnpm --filter @bootlabs/backend user -- -e admin@bootlabs.local -p change-me
 
 ### Voller Docker-Stack
 
+Für den ersten Produktions-/Compose-Start optional einen einmaligen Admin-Bootstrap aktivieren. In `.env` beide Variablen setzen (siehe auskommentierte Platzhalter in `.env.example`):
+
+```bash
+MEDUSA_ADMIN_EMAIL=admin@bootlabs.local
+MEDUSA_ADMIN_PASSWORD='choose-a-strong-password'
+```
+
 ```bash
 cp .env.example .env
+# MEDUSA_ADMIN_EMAIL und MEDUSA_ADMIN_PASSWORD setzen
 pnpm compose:up
 pnpm compose:ps
 ```
+
+Der Medusa-Container migriert die DB und legt den Admin an, falls die E-Mail noch nicht existiert. Danach:
+
+1. Login unter [http://localhost:9000/app](http://localhost:9000/app)
+2. `MEDUSA_ADMIN_PASSWORD` aus `.env` entfernen (am besten auch `MEDUSA_ADMIN_EMAIL`)
+3. Container neu starten: `pnpm compose:up`
+
+Nicht `docker compose exec medusa npx medusa user …` aus `/server` ausführen — das scheitert außerhalb des Medusa-App-Roots. Der Bootstrap läuft automatisch im Entrypoint aus `apps/backend`.
 
 Healthchecks:
 

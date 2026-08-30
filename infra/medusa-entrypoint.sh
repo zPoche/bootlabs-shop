@@ -39,9 +39,15 @@ socket.on("error", () => process.exit(1));
   sleep 2
 done
 
+# CLI commands (migrate, exec, user) must run from the Medusa app root.
+# The production process then starts from .medusa/server.
 cd /server/apps/backend
 echo "Running Medusa migrations..."
 "$MEDUSA_BIN" db:migrate
+
+echo "Running optional Medusa admin bootstrap..."
+"$MEDUSA_BIN" exec ./src/scripts/bootstrap-admin.ts
+
 echo "Starting Medusa..."
 cd /server/apps/backend/.medusa/server
 exec "$MEDUSA_BIN" start
