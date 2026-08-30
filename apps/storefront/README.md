@@ -9,5 +9,6 @@ Bootlabs overlay in Phase 0 is limited to:
 - `GET /api/health`
 - hero copy
 - Docker `output: "standalone"`
+- `generateStaticParams` returns `[]` when Medusa or a publishable key is not available yet
 
 Catalog, checkout, and branding beyond that start in Phase 1.
