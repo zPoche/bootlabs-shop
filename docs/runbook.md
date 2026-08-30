@@ -29,10 +29,11 @@ pnpm compose:logs
 
 Images:
 
-- `infra/Dockerfile.medusa`
+- `infra/Dockerfile.medusa` — Production-Start aus `apps/medusa/.medusa/server`
 - `infra/Dockerfile.storefront`
 
-Compose setzt `DATABASE_URL` und `REDIS_URL` auf die Service-Namen `postgres` und `redis`. Host-Ports bleiben 5432, 6379, 9000, 8000, 5173.
+Compose veröffentlicht Postgres, Redis, Medusa und Storefront auf dem Host.
+Medusa erreicht die Datenbanken über `host-gateway` (veröffentlichte Ports), nicht über die interne Docker-Bridge. Das ist auf Linux-VMs und Docker Desktop zuverlässiger, wenn Inter-Container-TCP eingeschränkt ist.
 
 Healthchecks müssen `healthy` sein, bevor der Stack als gestartet gilt.
 

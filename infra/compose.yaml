@@ -46,12 +46,16 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    extra_hosts:
+      - "postgres:host-gateway"
+      - "redis:host-gateway"
     ports:
       - "9000:9000"
       - "5173:5173"
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgres://${POSTGRES_USER:-bootlabs}:${POSTGRES_PASSWORD:-bootlabs}@postgres:5432/${POSTGRES_DB:-bootlabs}
+      DATABASE_URL: postgres://${POSTGRES_USER:-bootlabs}:${POSTGRES_PASSWORD:-bootlabs}@postgres:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-bootlabs}
+      POSTGRES_HOST: postgres
       DATABASE_SSL: "false"
       REDIS_URL: redis://redis:6379
       STORE_CORS: ${STORE_CORS:-http://localhost:8000}
