@@ -8,7 +8,7 @@ WORKDIR /server
 
 FROM base AS deps
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml .npmrc ./
-COPY apps/medusa/package.json apps/medusa/package.json
+COPY apps/backend/package.json apps/backend/package.json
 COPY apps/storefront/package.json apps/storefront/package.json
 COPY packages/ui/package.json packages/ui/package.json
 COPY packages/bootlabs-configurator/package.json packages/bootlabs-configurator/package.json
@@ -20,6 +20,9 @@ RUN pnpm install --frozen-lockfile
 
 FROM deps AS build
 COPY . .
+ENV NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:9000
+ENV NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_placeholder_phase0
+ENV NEXT_PUBLIC_DEFAULT_REGION=de
 RUN pnpm --filter @bootlabs/storefront build
 
 FROM base AS runner

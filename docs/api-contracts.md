@@ -5,10 +5,10 @@
 | Methode | Pfad | Quelle | Zweck |
 | --- | --- | --- | --- |
 | GET | `/health` | Medusa Core | Container-Healthcheck |
-| GET | `/store/health` | `apps/medusa` | Bootlabs-Status JSON |
+| GET | `/store/health` | `apps/backend` | Bootlabs-Status JSON |
 | GET | `/app` | Medusa Admin | Backoffice |
 | GET | `/api/health` | Storefront | Container-Healthcheck |
-| GET | `/` | Storefront | Phase-0-Landingpage |
+| GET | `/` | Storefront | offizieller Medusa Next.js Starter (Region `/de`) |
 
 `GET /store/health` Antwort:
 
@@ -74,5 +74,5 @@ Keine öffentlichen Miet-Endpunkte. Stripe-Billing-Webhooks erst nach Freigabe:
 ## Auth und Keys
 
 - Storefront-Aufrufe an Medusa brauchen später einen Publishable API Key (`NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY`).
-- Admin braucht einen User (`pnpm --filter @bootlabs/medusa user`).
+- Admin braucht einen User (`pnpm --filter @bootlabs/backend user`).
 - Keine Stripe-Secret-Keys im Browser.

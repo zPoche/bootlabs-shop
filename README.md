@@ -2,7 +2,9 @@
 
 Deutschsprachiger Gaming-PC-Systemintegrator. Dieses Repository ist die **Bootlabs-Commerce-Anwendung**, kein gepflegter Medusa-Core-Fork.
 
-Medusa v2 kommt ausschließlich als versionierte npm-Dependency (`@medusajs/*` 2.19.0). Updates laufen über `package.json`, Migrationen und Tests — nie über `git merge upstream`.
+Die Basis ist die offizielle [create-medusa-app](https://docs.medusajs.com/learn/installation) / [dtc-starter](https://github.com/medusajs/dtc-starter)-Struktur: Medusa-Backend und Next.js-Storefront als pnpm-Workspace. Medusa v2 kommt ausschließlich als versionierte npm-Dependency (`@medusajs/*` 2.19.0). Updates laufen über `package.json`, Migrationen und Tests — nie über `git merge upstream`.
+
+Bootlabs-Fachlogik liegt nur in lokalen Plugins und Modulen unter `packages/`.
 
 ## Zielbild
 
@@ -17,8 +19,8 @@ Phase 0 (dieses Release) liefert nur das technische Fundament. Phase 1 startet e
 ## Struktur
 
 ```text
-apps/medusa                    Medusa-v2-Anwendung
-apps/storefront                Next.js Shop
+apps/backend                   offizielle Medusa-v2-App (@bootlabs/backend)
+apps/storefront                offizieller Medusa Next.js Storefront
 packages/ui                    Design-Tokens
 packages/bootlabs-configurator gemeinsame Typen, Regelkatalog, Preisvertrag
 packages/medusa-plugin-*       lokale Plugins (Skelette, noch nicht registriert)
@@ -44,7 +46,7 @@ pnpm install
 
 ```bash
 docker compose -f infra/compose.yaml up -d postgres redis
-pnpm --filter @bootlabs/medusa db:migrate
+pnpm --filter @bootlabs/backend db:migrate
 pnpm dev
 ```
 
@@ -55,7 +57,7 @@ Storefront: [http://localhost:8000](http://localhost:8000)
 Admin-User anlegen:
 
 ```bash
-pnpm --filter @bootlabs/medusa user -- -e admin@bootlabs.local -p change-me
+pnpm --filter @bootlabs/backend user -- -e admin@bootlabs.local -p change-me
 ```
 
 ### Voller Docker-Stack

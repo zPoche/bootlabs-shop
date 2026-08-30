@@ -6,15 +6,15 @@
 cp .env.example .env
 pnpm install
 docker compose -f infra/compose.yaml up -d postgres redis
-pnpm --filter @bootlabs/medusa db:migrate
-pnpm --filter @bootlabs/medusa user -- -e admin@bootlabs.local -p change-me
+pnpm --filter @bootlabs/backend db:migrate
+pnpm --filter @bootlabs/backend user -- -e admin@bootlabs.local -p change-me
 pnpm dev
 ```
 
 Einzelprozesse:
 
 ```bash
-pnpm dev:medusa
+pnpm dev:backend
 pnpm dev:storefront
 ```
 
@@ -29,7 +29,7 @@ pnpm compose:logs
 
 Images:
 
-- `infra/Dockerfile.medusa` — Production-Start aus `apps/medusa/.medusa/server`
+- `infra/Dockerfile.medusa` — Production-Start aus `apps/backend/.medusa/server`
 - `infra/Dockerfile.storefront`
 
 Compose veröffentlicht Postgres, Redis, Medusa und Storefront auf dem Host.
@@ -47,10 +47,10 @@ Stoppen: `pnpm compose:down`
 
 ## Migrationen
 
-Immer aus `apps/medusa` bzw. per Filter:
+Immer aus `apps/backend` bzw. per Filter:
 
 ```bash
-pnpm --filter @bootlabs/medusa db:migrate
+pnpm --filter @bootlabs/backend db:migrate
 ```
 
 Nach Medusa-Updates zuerst Release Notes, dann dieselbe Command. Rollback nur modulweise mit `medusa db:rollback <module>` — siehe Update-Prozess.
@@ -98,7 +98,7 @@ Rollback: vorheriges Image-Tag starten, bei Schema-Änderungen zuerst Module rol
 | --- | --- |
 | Medusa startet nicht | `DATABASE_URL`, `DATABASE_SSL=false` gegen lokales Postgres, Redis erreichbar |
 | Admin leer / Vite-Fehler | Port 5173, nicht `/app` als Docker-WORKDIR verwenden (`/server`) |
-| Storefront 500 | `NEXT_PUBLIC_MEDUSA_BACKEND_URL`, Build `standalone` |
+| Storefront 500 | `NEXT_PUBLIC_MEDUSA_BACKEND_URL`, Publishable Key, Regionen in Admin |
 | Compose unhealthy | `docker compose logs`, `curl /health` |
 | pnpm Admin-Build | `.npmrc` Hoist-Patterns nicht entfernen |
 

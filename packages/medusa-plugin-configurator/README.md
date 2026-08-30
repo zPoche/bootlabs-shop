@@ -1,6 +1,6 @@
 # @bootlabs/medusa-plugin-configurator
 
-Phase-2-Plugin. Noch nicht in `apps/medusa/medusa-config.ts` registriert.
+Phase-2-Plugin. Noch nicht in `apps/backend/medusa-config.ts` registriert.
 
 Geplante Medusa-Erweiterungen:
 

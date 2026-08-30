@@ -3,7 +3,7 @@ set -eu
 
 MEDUSA_BIN="/server/node_modules/.bin/medusa"
 if [ ! -x "$MEDUSA_BIN" ]; then
-  MEDUSA_BIN="/server/apps/medusa/node_modules/.bin/medusa"
+  MEDUSA_BIN="/server/apps/backend/node_modules/.bin/medusa"
 fi
 
 echo "Waiting for PostgreSQL..."
@@ -39,9 +39,9 @@ socket.on("error", () => process.exit(1));
   sleep 2
 done
 
-cd /server/apps/medusa
+cd /server/apps/backend
 echo "Running Medusa migrations..."
 "$MEDUSA_BIN" db:migrate
 echo "Starting Medusa..."
-cd /server/apps/medusa/.medusa/server
+cd /server/apps/backend/.medusa/server
 exec "$MEDUSA_BIN" start

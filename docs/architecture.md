@@ -7,7 +7,9 @@
 | Thema | Entscheidung |
 | --- | --- |
 | Shop-Engine | Medusa v2 als npm-Dependency, aktuell **2.19.0** |
-| Storefront | eigenes Next.js 16, nicht der Medusa-Starter-Shop |
+| App-Layout | offizielle create-medusa-app / [dtc-starter](https://github.com/medusajs/dtc-starter)-Struktur |
+| Backend | `apps/backend` (`@bootlabs/backend`) |
+| Storefront | offizieller Medusa Next.js Starter in `apps/storefront` |
 | Datenbank | PostgreSQL 16 |
 | Cache / Events | Redis 7 |
 | Zahlungen | Stripe, nur Testmodus, Anbindung in Phase 1 |
@@ -58,16 +60,16 @@ Diese Bäume gehören zum Medusa-Upstream und werden hier nicht weiterentwickelt
 
 - **Medusa-Version 2.19.0** als npm-Pin, identisch zum Fork-Stand
 - **Lizenztexte** nach `docs/licenses/` (MIT, Enterprise-Hinweis, Security-Policy)
-- **Konventionen** der offiziellen App: `medusa-config.ts`, `src/{api,admin,workflows,modules,subscribers,jobs,links}`, Jest-Unit-Layout
-- Dateien angelehnt an [medusajs/dtc-starter](https://github.com/medusajs/dtc-starter) (MIT), umbenannt nach `apps/medusa`
+- **Offizielle App-Konventionen** aus [medusajs/dtc-starter](https://github.com/medusajs/dtc-starter) (MIT): `apps/backend`, `apps/storefront`, `medusa-config.ts`, `src/{api,admin,workflows,modules,subscribers,jobs,links}`
 
 ### Ersetzt
 
 | Vorher | Nachher |
 | --- | --- |
-| Yarn-3-Core-Monorepo | pnpm-App-Monorepo |
+| Yarn-3-Core-Monorepo | pnpm-App-Monorepo im dtc-starter-Layout |
 | Medusa-Quellen im Repo | `@medusajs/*` aus der Registry |
-| kein Storefront | `apps/storefront` (Bootlabs, nicht Medusa-Starter) |
+| kein / eigenes Storefront | offizieller Next.js Storefront in `apps/storefront` |
+| `apps/medusa` | `apps/backend` (`@bootlabs/backend`) |
 | keine Infra | `infra/compose.yaml` + Dockerfiles |
 | Medusa-README | Bootlabs-README und `docs/` |
 
@@ -75,20 +77,22 @@ Diese Bäume gehören zum Medusa-Upstream und werden hier nicht weiterentwickelt
 
 ```text
 Browser
-  └─ apps/storefront   :8000   Next.js
+  └─ apps/storefront   :8000   Next.js (offizieller Medusa-Starter)
         └─ REST
-             └─ apps/medusa    :9000   @medusajs/medusa + Admin /app
+             └─ apps/backend   :9000   @medusajs/medusa + Admin /app
                     ├─ PostgreSQL :5432
                     └─ Redis      :6379
 ```
 
-Caddy und Cloudflare sitzen später vor den HTTP-Ports. Shopify und Volt sind ausgeschlossen.
+Caddy und Cloudflare sitzen später vor den HTTP-Ports.
 
 ## Pakete
 
 | Paket | Rolle | Registriert? |
 | --- | --- | --- |
-| `@bootlabs/ui` | Tokens | Storefront importiert CSS |
+| `@bootlabs/backend` | offizielle Medusa-v2-App | ja, Runtime |
+| `@bootlabs/storefront` | offizieller Next.js Storefront | ja, Runtime |
+| `@bootlabs/ui` | Tokens | später Storefront/Admin |
 | `@bootlabs/configurator` | Typen, Regelkatalog, Preisvertrag | nein, Fachbibliothek |
 | `@bootlabs/medusa-plugin-configurator` | Phase-2-Skelett | nein |
 | `@bootlabs/medusa-plugin-devices` | Phase-3-Skelett | nein |
@@ -109,7 +113,7 @@ Plugins werden erst registriert, wenn sie echte Module und Tests haben. Leere Pl
 
 Nach Freigabe:
 
-- Bootlabs-Shop-Design und Seiten `/gaming-pcs`, Warenkorb, Konto
+- Bootlabs-Shop-Design auf dem offiziellen Storefront
 - Katalog, Kategorien, fünf Standard-PCs, Zubehör, Services
 - Stripe-Einmalzahlung im Testmodus
 - Bestell-Workflow und BuildOrder

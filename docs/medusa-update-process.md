@@ -16,7 +16,7 @@ Solche Merges würden den entfernten Core-Tree zurückbringen und Bootlabs-Code 
 
 1. **Version feststellen**
    ```bash
-   pnpm --filter @bootlabs/medusa exec medusa -v
+   pnpm --filter @bootlabs/backend exec medusa -v
    ```
 2. **Release Notes** von [medusajs/medusa releases](https://github.com/medusajs/medusa/releases) lesen. Breaking Changes notieren.
 3. **Alle `@medusajs/*` auf dieselbe Version** setzen. Medusa versioniert die Commerce-Pakete gemeinsam. Design-System-Pakete (`@medusajs/ui`) können abweichen — Release Notes beachten.
@@ -26,7 +26,7 @@ Solche Merges würden den entfernten Core-Tree zurückbringen und Bootlabs-Code 
    ```
 5. **Migrationen**
    ```bash
-   pnpm --filter @bootlabs/medusa db:migrate
+   pnpm --filter @bootlabs/backend db:migrate
    ```
 6. **Prüfen**
    ```bash
@@ -44,7 +44,7 @@ Nicht einzelne `@medusajs/*`-Pakete mischen (z. B. Framework 2.20 und Medusa 2.1
 ## Rollback
 
 1. Betroffene Module identifizieren
-2. `pnpm --filter @bootlabs/medusa exec medusa db:rollback <module> ...`
+2. `pnpm --filter @bootlabs/backend exec medusa db:rollback <module> ...`
 3. Versionen in `package.json` zurücksetzen
 4. `pnpm install`
 5. `db:migrate` für Link-Sync
