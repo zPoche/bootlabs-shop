@@ -2,6 +2,7 @@ import type { MedusaContainer } from "@medusajs/framework/types"
 import {
   ContainerRegistrationKeys,
   FeatureFlag,
+  MedusaError,
   Modules,
 } from "@medusajs/framework/utils"
 import { resolveAdminBootstrapDecision } from "../lib/admin-bootstrap"
@@ -97,7 +98,10 @@ export default async function bootstrapAdmin({
     logger.error(
       `Admin bootstrap failed while registering auth identity for ${decision.email}.`
     )
-    throw new Error(error ? String(error) : "Auth identity was not created.")
+    throw new MedusaError(
+      MedusaError.Types.UNEXPECTED_STATE,
+      error ? String(error) : "Auth identity was not created."
+    )
   }
 
   await authModule.updateAuthIdentities({
