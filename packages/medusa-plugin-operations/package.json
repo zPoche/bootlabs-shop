@@ -1,0 +1,20 @@
+{
+  "name": "@bootlabs/medusa-plugin-operations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Build, QC, shipping and RMA operations (Phase 1/3)",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "keywords": ["medusa-plugin", "bootlabs", "operations"],
+  "scripts": {
+    "lint": "echo 'plugin-operations: skeleton'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vitest": "^3.2.4"
+  }
+}

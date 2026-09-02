@@ -1,0 +1,23 @@
+{
+  "name": "@bootlabs/medusa-plugin-configurator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Medusa integration for Bootlabs PC configurations (Phase 2)",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "keywords": ["medusa-plugin", "bootlabs", "configurator"],
+  "scripts": {
+    "lint": "echo 'plugin-configurator: skeleton'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bootlabs/configurator": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vitest": "^3.2.4"
+  }
+}

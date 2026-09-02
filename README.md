@@ -1,73 +1,126 @@
-<p align="center">
-  <a href="https://www.medusajs.com">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    </picture>
-  </a>
-</p>
-<h1 align="center">
-  Medusa
-</h1>
+# Bootlabs Shop
 
-<h4 align="center">
-  <a href="https://docs.medusajs.com">Documentation</a> |
-  <a href="https://www.medusajs.com">Website</a>
-</h4>
+Deutschsprachiger Gaming-PC-Systemintegrator. Dieses Repository ist die **Bootlabs-Commerce-Anwendung**, kein gepflegter Medusa-Core-Fork.
 
-<p align="center">
-  Building blocks for digital commerce
-</p>
-<p align="center">
-  <a href="https://github.com/medusajs/medusa/blob/develop/LICENSE">
-    <img src="https://img.shields.io/badge/license-open--core-blue.svg" alt="Medusa uses an open-core licensing model." />
-  </a>
-  <a href="https://github.com/medusajs/medusa/blob/develop/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
-  </a>
- <p align="center">
-  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
-    <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Follow%20@medusajs" alt="Follow @medusajs" />
-  <a href="https://discord.gg/medusajs">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
-  </a>
-</p>
+Die Basis ist die offizielle [create-medusa-app](https://docs.medusajs.com/learn/installation) / [dtc-starter](https://github.com/medusajs/dtc-starter)-Struktur: Medusa-Backend und Next.js-Storefront als pnpm-Workspace. Medusa v2 kommt ausschließlich als versionierte npm-Dependency (`@medusajs/*` 2.19.0). Updates laufen über `package.json`, Migrationen und Tests — nie über `git merge upstream`.
 
-## Getting Started
+Bootlabs-Fachlogik liegt nur in lokalen Plugins und Modulen unter `packages/`.
 
-The fastest way to get started is with [Medusa Cloud](https://medusajs.com/cloud/). It provides a managed environment optimized for Medusa applications, with automated deployments, scaling, and maintenance. [Get started on Medusa Cloud](https://cloud.medusajs.com)
+## Zielbild
 
-To set up a Medusa application locally, visit the [Documentation](https://docs.medusajs.com/learn).
+1. Direktkauf vorkonfigurierter und frei konfigurierbarer Gaming-PCs
+2. Zubehör, Software und Servicepakete
+3. Später: Hardware-as-a-Service / PC-Miete
+4. Eigener Konfigurator mit serverseitiger Kompatibilität und Preiskalkulation
+5. Geräte-Lebenszyklus: Seriennummer, Build, Burn-in, Versand, RMA, Refurbishment
 
-## About Medusa
+Phase 0 (dieses Release) liefert nur das technische Fundament. Phase 1 startet erst nach Freigabe.
 
-Medusa is a commerce platform with a built-in framework for customization that allows you to build custom commerce applications without reinventing core commerce logic. The framework and modules can be used to support advanced B2B or DTC commerce stores, marketplaces, distributor platforms, PoS systems, service businesses, or similar solutions that need foundational commerce primitives. Medusa's core commerce modules are open-source and freely available on npm. Enterprise Edition features are identified separately in the repository.
+## Struktur
 
-Learn more about [Medusa’s architecture](https://docs.medusajs.com/learn/advanced-development/architecture/overview) and [commerce modules](https://docs.medusajs.com/resources/commerce-modules) in the Docs.
+```text
+apps/backend                   offizielle Medusa-v2-App (@bootlabs/backend)
+apps/storefront                offizieller Medusa Next.js Storefront
+packages/ui                    Design-Tokens
+packages/bootlabs-configurator gemeinsame Typen, Regelkatalog, Preisvertrag
+packages/medusa-plugin-*       lokale Plugins (Skelette, noch nicht registriert)
+infra/                         Compose, Dockerfiles, env.example
+docs/                          Architektur, Domäne, Runbook, Update-Prozess
+```
 
-## Upgrades & Integrations
+## Voraussetzungen
 
-Follow the [Release Notes](https://github.com/medusajs/medusa/releases) to keep your Medusa project up-to-date.
+- Node.js 20.19+ oder 22.12+ (`.nvmrc` = 22)
+- pnpm 10
+- Docker + Docker Compose für den vollen Stack
+- PostgreSQL 16 und Redis 7 (lokal oder per Compose)
 
-Check out all [available Medusa integrations](https://medusajs.com/integrations/).
+## Schnellstart
 
-## Community & Contributions
+```bash
+cp .env.example .env
+pnpm install
+```
 
-The core team is available in [GitHub Discussions](https://github.com/medusajs/medusa/discussions), where you can create issues, share ideas, and discuss roadmap.
+### Nur Infrastruktur (Postgres + Redis)
 
-Our [Contribution Guide](https://github.com/medusajs/medusa/blob/develop/CONTRIBUTING.md) describes how to contribute to the codebase and Docs.
+```bash
+docker compose -f infra/compose.yaml up -d postgres redis
+pnpm --filter @bootlabs/backend db:migrate
+pnpm dev
+```
 
-Join our [Discord server](https://discord.gg/medusajs) to meet and discuss with more than 14,000 other community members.
+Medusa: [http://localhost:9000](http://localhost:9000)  
+Admin: [http://localhost:9000/app](http://localhost:9000/app)  
+Storefront: [http://localhost:8000](http://localhost:8000)
 
-## Other channels
+Admin-User lokal anlegen:
 
-- [GitHub Issues](https://github.com/medusajs/medusa/issues)
-- [Community Discord](https://discord.gg/medusajs)
-- [Twitter](https://twitter.com/medusajs)
-- [LinkedIn](https://www.linkedin.com/company/medusajs)
-- [Medusa Blog](https://medusajs.com/blog/)
+```bash
+pnpm --filter @bootlabs/backend user -- -e admin@bootlabs.local -p change-me
+```
 
-## License
+### Voller Docker-Stack
 
-Medusa uses an open-core model. The core is licensed under the [MIT License](https://github.com/medusajs/medusa/blob/develop/LICENSE). The RBAC-based Enterprise Edition materials identified in [ENTERPRISE-LICENSE.md](https://github.com/medusajs/medusa/blob/develop/ENTERPRISE-LICENSE.md) require a commercial agreement with MedusaJS, Inc.
+Für den ersten Produktions-/Compose-Start optional einen einmaligen Admin-Bootstrap aktivieren. In `.env` beide Variablen setzen (siehe auskommentierte Platzhalter in `.env.example`):
+
+```bash
+MEDUSA_ADMIN_EMAIL=admin@bootlabs.local
+MEDUSA_ADMIN_PASSWORD='choose-a-strong-password'
+```
+
+```bash
+cp .env.example .env
+# MEDUSA_ADMIN_EMAIL und MEDUSA_ADMIN_PASSWORD setzen
+pnpm compose:up
+pnpm compose:ps
+```
+
+Der Medusa-Container migriert die DB und legt den Admin an, falls die E-Mail noch nicht existiert. Danach:
+
+1. Login unter [http://localhost:9000/app](http://localhost:9000/app)
+2. `MEDUSA_ADMIN_PASSWORD` aus `.env` entfernen (am besten auch `MEDUSA_ADMIN_EMAIL`)
+3. Container neu starten: `pnpm compose:up`
+
+Nicht `docker compose exec medusa npx medusa user …` aus `/server` ausführen — das scheitert außerhalb des Medusa-App-Roots. Der Bootstrap läuft automatisch im Entrypoint aus `apps/backend`.
+
+Healthchecks:
+
+- Postgres: `pg_isready`
+- Redis: `redis-cli ping`
+- Medusa: `GET /health`
+- Storefront: `GET /api/health`
+
+Herunterfahren: `pnpm compose:down`
+
+## Qualitätsbefehle
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+# oder alles nacheinander
+pnpm check
+./scripts/check-phase0.sh
+```
+
+## Stripe
+
+Nur Testmodus. In `.env` die Platzhalter `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` und `STRIPE_WEBHOOK_SECRET` erst in Phase 1 mit `sk_test_` / `pk_test_`-Werten füllen. Keine Live-Keys, keine Keys im Frontend als Secret.
+
+## Dokumentation
+
+- [docs/architecture.md](docs/architecture.md) — Entscheidung, Migration vom Core-Fork
+- [docs/domain-model.md](docs/domain-model.md) — geplante Domäne inkl. Phase 1/2
+- [docs/api-contracts.md](docs/api-contracts.md) — vorhandene und geplante APIs
+- [docs/runbook.md](docs/runbook.md) — Betrieb, Logs, Backups, Deployment
+- [docs/medusa-update-process.md](docs/medusa-update-process.md) — Dependency-Updates
+
+## Was Phase 0 bewusst nicht enthält
+
+- Produktkatalog und die fünf PLAY/CREATE/REFRESH-Modelle
+- Warenkorb, Checkout, Stripe-Zahlung
+- funktionierenden Konfigurator
+- Mietvertrag, Bonität, Kaufoption
+- Änderungen am Medusa-Core

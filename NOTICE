@@ -1,0 +1,19 @@
+Bootlabs Commerce
+=================
+
+This repository is the Bootlabs Commerce application. It is not a maintained
+fork of the Medusa core.
+
+Medusa v2 is consumed exclusively as versioned npm dependencies
+(`@medusajs/*`). Do not merge `upstream/main` or edit Medusa core sources.
+
+Historical Medusa license texts (MIT and Enterprise Edition notice) from the
+original GitHub fork are kept in:
+
+- docs/licenses/MEDUSA-LICENSE.md
+- docs/licenses/MEDUSA-ENTERPRISE-LICENSE.md
+- docs/licenses/MEDUSA-SECURITY.md
+
+Files adapted from the official Medusa DTC starter
+(https://github.com/medusajs/dtc-starter) remain subject to the Medusa MIT
+license in `docs/licenses/MEDUSA-LICENSE.md`.
