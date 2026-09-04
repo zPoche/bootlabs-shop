@@ -23,6 +23,12 @@ importers:
 
   apps/backend:
     dependencies:
+      '@bootlabs/configurator':
+        specifier: workspace:*
+        version: link:../../packages/bootlabs-configurator
+      '@bootlabs/medusa-plugin-operations':
+        specifier: workspace:*
+        version: link:../../packages/medusa-plugin-operations
       '@medusajs/admin-sdk':
         specifier: 2.19.0
         version: 2.19.0
@@ -114,6 +120,9 @@ importers:
 
   apps/storefront:
     dependencies:
+      '@bootlabs/configurator':
+        specifier: workspace:*
+        version: link:../../packages/bootlabs-configurator
       '@headlessui/react':
         specifier: ^2.2.0
         version: 2.2.10(react-dom@19.0.5(react@19.0.5))(react@19.0.5)

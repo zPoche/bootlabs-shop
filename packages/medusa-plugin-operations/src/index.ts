@@ -12,7 +12,7 @@ export type BuildOrderState =
 export const pluginStatus = {
   id: pluginId,
   phase: 1,
-  registeredInMedusa: false,
+  registeredInMedusa: true,
   plannedEntities: ["BuildOrder", "RmaCase"],
   plannedAdminViews: ["build-queue", "returns-rma"],
 } as const

@@ -14,7 +14,7 @@ Bootlabs-Fachlogik liegt nur in lokalen Plugins und Modulen unter `packages/`.
 4. Eigener Konfigurator mit serverseitiger Kompatibilität und Preiskalkulation
 5. Geräte-Lebenszyklus: Seriennummer, Build, Burn-in, Versand, RMA, Refurbishment
 
-Phase 0 (dieses Release) liefert nur das technische Fundament. Phase 1 startet erst nach Freigabe.
+Phase 1–3 sind im Shop umgesetzt: Katalog, Konfigurator, Build-Queue, Geräte/RMA. Miete bleibt blockiert.
 
 ## Struktur
 
@@ -107,7 +107,16 @@ pnpm check
 
 ## Stripe
 
-Nur Testmodus. In `.env` die Platzhalter `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` und `STRIPE_WEBHOOK_SECRET` erst in Phase 1 mit `sk_test_` / `pk_test_`-Werten füllen. Keine Live-Keys, keine Keys im Frontend als Secret.
+Der Checkout kann bereits Karten über Stripe. Es fehlen nur deine Test-Keys.
+
+1. Account auf [dashboard.stripe.com](https://dashboard.stripe.com) (Testmodus oben rechts).
+2. Keys unter [API keys](https://dashboard.stripe.com/test/apikeys):
+   - Secret key → `STRIPE_SECRET_KEY=sk_test_...`
+   - Publishable key → `STRIPE_PUBLISHABLE_KEY=pk_test_...` und dieselbe Zeile als `NEXT_PUBLIC_STRIPE_KEY=pk_test_...`
+3. Optional Webhook auf `https://deine-domain:9000/hooks/payment/stripe_stripe` → `STRIPE_WEBHOOK_SECRET=whsec_...`
+4. `pnpm compose:up` neu bauen, damit der Storefront den Publishable Key einpackt.
+
+Keine Live-Keys (`sk_live_` / `pk_live_`), solange ihr testet. Das Secret kommt nie ins Frontend.
 
 ## Dokumentation
 
@@ -117,10 +126,13 @@ Nur Testmodus. In `.env` die Platzhalter `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABL
 - [docs/runbook.md](docs/runbook.md) — Betrieb, Logs, Backups, Deployment
 - [docs/medusa-update-process.md](docs/medusa-update-process.md) — Dependency-Updates
 
-## Was Phase 0 bewusst nicht enthält
+## Was bewusst nicht enthalten ist
 
-- Produktkatalog und die fünf PLAY/CREATE/REFRESH-Modelle
-- Warenkorb, Checkout, Stripe-Zahlung
-- funktionierenden Konfigurator
-- Mietvertrag, Bonität, Kaufoption
 - Änderungen am Medusa-Core
+
+Nach dem Deploy:
+
+```bash
+pnpm --filter @bootlabs/backend db:migrate
+pnpm --filter @bootlabs/backend seed
+```

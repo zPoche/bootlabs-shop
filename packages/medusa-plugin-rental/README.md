@@ -1,20 +1,7 @@
 # @bootlabs/medusa-plugin-rental
 
-Nur dokumentierte Erweiterungspunkte. **Kein Mietprozess.**
+Mietanfragen liegen in `apps/backend/src/modules/rental`.
 
-Reserviert für später:
-
-- `RentalContract`
-- `RentalEvent`
-- Gerätezuordnung
-- Stripe Billing
-- Rückgabe, Schaden, Refurbishment
-
-Ausdrücklich nicht enthalten:
-
-- automatisierte Bonität
-- Kaufoption im Mietvertrag
-- echte Vertrags- oder Zahlungsprozesse
-- automatisches Sperren oder Löschen von Geräten
-
-Dieses Plugin darf erst nach gesonderter fachlicher und rechtlicher Freigabe registriert werden.
+- Store: `POST /store/rentals`
+- Admin: Miete
+- Kauf bleibt der Hauptweg. Stripe Billing für Monatsraten folgt, sobald die Keys gesetzt sind.

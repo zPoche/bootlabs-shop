@@ -15,6 +15,7 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
+    "@bootlabs/configurator": "workspace:*",
     "@headlessui/react": "^2.2.0",
     "@medusajs/icons": "2.19.0",
     "@medusajs/js-sdk": "2.19.0",

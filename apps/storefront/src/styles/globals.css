@@ -638,6 +638,117 @@ h2,
   outline-offset: 2px;
 }
 
+.catalog-page {
+  padding: 3.5rem 0 5rem;
+}
+
+.catalog-page h1,
+.catalog-page h2 {
+  font-family: var(--font-display), sans-serif;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.catalog-lead {
+  max-width: 42rem;
+  color: var(--muted);
+  margin: 1rem 0 2.5rem;
+}
+
+.system-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.system-card,
+.configurator-summary,
+.configurator-field {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
+}
+
+.system-card ul {
+  margin: 0.85rem 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.system-price {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 0.6rem 0 0.2rem;
+}
+
+.system-meta {
+  color: var(--dim);
+  font-size: 0.88rem;
+}
+
+.configurator-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.configurator-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.configurator-field span {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.configurator-field select {
+  width: 100%;
+  background: #0a0b0d;
+  color: var(--foreground);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+}
+
+.configurator {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.configurator-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.configurator-issues {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.configurator-issues li[data-severity="block"] {
+  color: #ff8b8b;
+}
+
+.configurator-issues li[data-severity="warning"] {
+  color: #ffd27a;
+}
+
+@media (min-width: 960px) {
+  .configurator {
+    grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.8fr);
+    align-items: start;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

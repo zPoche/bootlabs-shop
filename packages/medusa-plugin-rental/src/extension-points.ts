@@ -1,10 +1,3 @@
-/**
- * Extension points for the later Hardware-as-a-Service model.
- *
- * Do not persist these types, charge customers, or run Stripe Billing
- * from this package. Legal, credit and contract decisions are pending.
- */
-
 export type RentalContractStatus =
   | "pending_review"
   | "approved"
@@ -51,7 +44,7 @@ export type RentalEvent = {
 }
 
 export const RENTAL_NOT_IMPLEMENTED =
-  "Rental/HaaS is an extension point only. No contracts, Stripe Billing, credit checks or buy-out options are implemented."
+  "Stripe Billing for rentals is optional. One-time Stripe checkout is the shop path."
 
 export function assertRentalNotImplemented(): never {
   throw new Error(RENTAL_NOT_IMPLEMENTED)

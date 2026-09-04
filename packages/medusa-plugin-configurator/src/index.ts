@@ -5,7 +5,7 @@ export const pluginId = "medusa-plugin-configurator"
 export const pluginStatus = {
   id: pluginId,
   phase: 2,
-  registeredInMedusa: false,
+  registeredInMedusa: true,
   plannedModules: ["configurator"],
   plannedEntities: ["Component", "CompatibleRule", "PcConfiguration"],
   plannedRuleCount: RULE_CATALOG.length,
