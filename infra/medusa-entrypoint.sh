@@ -1,10 +1,17 @@
 #!/bin/sh
 set -eu
 
-MEDUSA_BIN="/server/node_modules/.bin/medusa"
-if [ ! -x "$MEDUSA_BIN" ]; then
-  MEDUSA_BIN="/server/apps/backend/node_modules/.bin/medusa"
-fi
+run_medusa() {
+  if [ -f /server/apps/backend/scripts/run-medusa.cjs ]; then
+    node /server/apps/backend/scripts/run-medusa.cjs "$@"
+  elif [ -f /server/node_modules/@medusajs/cli/cli.js ]; then
+    node /server/node_modules/@medusajs/cli/cli.js "$@"
+  elif [ -x /server/node_modules/.bin/medusa ]; then
+    /server/node_modules/.bin/medusa "$@"
+  else
+    /server/apps/backend/node_modules/.bin/medusa "$@"
+  fi
+}
 
 echo "Waiting for PostgreSQL..."
 i=0
@@ -43,11 +50,11 @@ done
 # The production process then starts from .medusa/server.
 cd /server/apps/backend
 echo "Running Medusa migrations..."
-"$MEDUSA_BIN" db:migrate
+run_medusa db:migrate
 
 echo "Running optional Medusa admin bootstrap..."
-"$MEDUSA_BIN" exec ./src/scripts/bootstrap-admin.ts
+run_medusa exec ./src/scripts/bootstrap-admin.ts
 
 echo "Starting Medusa..."
 cd /server/apps/backend/.medusa/server
-exec "$MEDUSA_BIN" start
+exec node /server/apps/backend/scripts/run-medusa.cjs start
