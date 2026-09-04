@@ -1,9 +1,13 @@
 export const tokens = {
   name: "bootlabs",
-  background: "#e8eef2",
-  foreground: "#102027",
-  muted: "#4a5b64",
-  accent: "#0b6b5a",
+  background: "#0A0B0D",
+  foreground: "#F4F6F5",
+  muted: "#9AA0AE",
+  dim: "#6E7480",
+  accent: "#7C5CFF",
+  accentSoft: "#CFC4FF",
+  ok: "#7CFFC4",
+  surface: "#0E0F17",
 } as const
 
 export type BootlabsTokenName = keyof typeof tokens

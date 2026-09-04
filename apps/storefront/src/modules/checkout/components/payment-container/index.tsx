@@ -103,7 +103,7 @@ export const StripePaymentContainer = ({
               onLoadError={(e) => {
                 setPaymentComplete(false)
                 setError(
-                  e.error?.message ?? "Could not load the payment methods."
+                  e.error?.message ?? "Zahlungsarten konnten nicht geladen werden."
                 )
               }}
             />
