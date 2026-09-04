@@ -7,6 +7,7 @@ describe("phase0 status", () => {
     expect(status.service).toBe(BOOTLABS_SERVICE)
     expect(status.phase).toBe(3)
     expect(status.features).toContain("configurator")
+    expect(status.features).toContain("rental")
     expect(status.commerceEngine).toBe("medusa-v2-dependency")
   })
 })

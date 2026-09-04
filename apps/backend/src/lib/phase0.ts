@@ -11,6 +11,7 @@ export const PHASE0_STATUS = {
     "build-orders",
     "devices",
     "rma",
+    "rental",
   ],
 } as const
 

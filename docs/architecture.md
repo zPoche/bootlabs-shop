@@ -97,7 +97,7 @@ Caddy und Cloudflare sitzen später vor den HTTP-Ports.
 | `@bootlabs/medusa-plugin-configurator` | Status/Vertrag Phase 2 | Modul in der App |
 | `@bootlabs/medusa-plugin-devices` | Status/Vertrag Phase 3 | Modul in der App |
 | `@bootlabs/medusa-plugin-operations` | Status/Vertrag Phase 1 | Modul in der App |
-| `@bootlabs/medusa-plugin-rental` | nur Erweiterungspunkte | nein, blockiert |
+| `@bootlabs/medusa-plugin-rental` | Mietanfragen | Modul in der App |
 
 Plugins werden erst registriert, wenn sie echte Module und Tests haben. Leere Plugins in `medusa-config.ts` würden nur Update-Risiko erzeugen.
 
@@ -117,9 +117,9 @@ Plugins werden erst registriert, wenn sie echte Module und Tests haben. Leere Pl
 - Geräte und RMA
 - Stripe-Testmodus, sobald `STRIPE_SECRET_KEY` gesetzt ist
 
-## Mietmodell — nicht implementiert
+## Mietmodell
 
-`@bootlabs/medusa-plugin-rental` enthält Typen und `assertRentalNotImplemented()`. Keine Bonität, keine Kaufoption, keine Stripe-Subscriptions.
+Mietanfragen liegen im Modul `rental` und in der Admin-Ansicht „Miete“. Kauf bleibt der Hauptweg. Stripe Billing für Monatsraten braucht dieselben Stripe-Keys.
 
 ## Risiken der Core-Fork-Migration
 

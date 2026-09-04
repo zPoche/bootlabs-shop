@@ -89,7 +89,7 @@ RentalContract
 RentalEvent
 ```
 
-Siehe `@bootlabs/medusa-plugin-rental`. Nicht persistieren, nicht abrechnen, nicht automatisch Geräte sperren.
+Siehe Modul `rental`. Mietanfragen werden persistiert. Stripe Billing für Monatsraten braucht die Stripe-Keys.
 
 ## Medusa-Nutzung
 

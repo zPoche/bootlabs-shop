@@ -46,6 +46,7 @@ module.exports = defineConfig({
     { resolve: "./src/modules/configurator" },
     { resolve: "./src/modules/operations" },
     { resolve: "./src/modules/devices" },
+    { resolve: "./src/modules/rental" },
     ...(process.env.STRIPE_SECRET_KEY
       ? [
           {
@@ -79,8 +80,5 @@ module.exports = defineConfig({
       },
     }),
   },
-  plugins: [
-    // Domain modules live in apps/backend/src/modules.
-    // Phase 4 rental stays unregistered until legal review.
-  ],
+  plugins: [],
 })

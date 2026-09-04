@@ -2,6 +2,7 @@ import { Metadata } from "next"
 
 import { formatEuro, SYSTEM_PRESETS } from "@bootlabs/configurator"
 import { findProductByHandle } from "@lib/data/configurator"
+import RentalRequestButton from "@modules/configurator/rental-request-button"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export const metadata: Metadata = {
@@ -69,6 +70,10 @@ export default async function GamingPcsPage(props: {
                 >
                   Anpassen
                 </LocalizedClientLink>
+                <RentalRequestButton
+                  monthlyRateCents={Math.round(system.priceCents / 24)}
+                  notes={`Mietanfrage ${system.name}`}
+                />
               </div>
             </article>
           ))}

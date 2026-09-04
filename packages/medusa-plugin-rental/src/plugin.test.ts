@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest"
-import { pluginStatus, assertRentalNotImplemented } from "./index"
+import { pluginStatus } from "./index"
 
-describe("rental plugin extension point", () => {
-  it("is documented and not implemented", () => {
-    expect(pluginStatus.implemented).toBe(false)
-    expect(pluginStatus.registeredInMedusa).toBe(false)
+describe("rental plugin", () => {
+  it("is registered for shop rental requests", () => {
+    expect(pluginStatus.implemented).toBe(true)
+    expect(pluginStatus.registeredInMedusa).toBe(true)
     expect(pluginStatus.phase).toBe(4)
-    expect(() => assertRentalNotImplemented()).toThrow(/extension point only/)
   })
 })

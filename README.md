@@ -107,7 +107,16 @@ pnpm check
 
 ## Stripe
 
-Nur Testmodus. In `.env` die Platzhalter `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` und `STRIPE_WEBHOOK_SECRET` erst in Phase 1 mit `sk_test_` / `pk_test_`-Werten füllen. Keine Live-Keys, keine Keys im Frontend als Secret.
+Der Checkout kann bereits Karten über Stripe. Es fehlen nur deine Test-Keys.
+
+1. Account auf [dashboard.stripe.com](https://dashboard.stripe.com) (Testmodus oben rechts).
+2. Keys unter [API keys](https://dashboard.stripe.com/test/apikeys):
+   - Secret key → `STRIPE_SECRET_KEY=sk_test_...`
+   - Publishable key → `STRIPE_PUBLISHABLE_KEY=pk_test_...` und dieselbe Zeile als `NEXT_PUBLIC_STRIPE_KEY=pk_test_...`
+3. Optional Webhook auf `https://deine-domain:9000/hooks/payment/stripe_stripe` → `STRIPE_WEBHOOK_SECRET=whsec_...`
+4. `pnpm compose:up` neu bauen, damit der Storefront den Publishable Key einpackt.
+
+Keine Live-Keys (`sk_live_` / `pk_live_`), solange ihr testet. Das Secret kommt nie ins Frontend.
 
 ## Dokumentation
 
@@ -119,7 +128,6 @@ Nur Testmodus. In `.env` die Platzhalter `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABL
 
 ## Was bewusst nicht enthalten ist
 
-- Mietvertrag, Bonität, Kaufoption (Phase 4, blockiert)
 - Änderungen am Medusa-Core
 
 Nach dem Deploy:
