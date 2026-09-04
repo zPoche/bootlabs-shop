@@ -1,5 +1,9 @@
 # Workflows
 
-Phase 1: BuildOrder-Workflow nach erfolgreicher Zahlung.
-Phase 2: serverseitige Konfigurations-Revalidierung vor Checkout.
-Phase 4: Mietvertrag — nur nach fachlicher und rechtlicher Freigabe.
+`hooks/cart-configuration.ts` hängt an `addToCartWorkflow` und `completeCartWorkflow`:
+
+- Konfiguration revalidieren
+- Blocker stoppen den Checkout
+- `unit_price` kommt vom Server (Euro, nicht Cent)
+
+Miet-Abos laufen über `POST /admin/rentals/:id/approve` und `POST /hooks/stripe-billing`.

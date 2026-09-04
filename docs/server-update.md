@@ -1,6 +1,6 @@
 # Shop auf dem Server aktualisieren
 
-Stand: 2026-09-04. Alles liegt auf `develop`. Feature-Branches sind gelöscht.
+Stand: 2026-09-04. Medusa **2.20.1**. Alles nach Merge auf `develop`.
 
 Checkout auf der VM: `~/coding/bootlabs-shop`
 
@@ -11,7 +11,7 @@ Checkout auf der VM: `~/coding/bootlabs-shop`
 - Konfigurator unter `/de/konfigurator`
 - Admin: Build-Queue, Konfigurator, Geräte, RMA, Miete
 - Stripe-Checkout, sobald die Test-Keys in `.env` stehen
-- Mietanfragen (`POST /store/rentals`) — noch keine automatische monatliche Abbuchung
+- Mietanfragen; Admin-Freigabe startet Stripe-Abo, Webhook `/hooks/stripe-billing`
 
 ## Nicht machen
 
@@ -31,7 +31,7 @@ git checkout develop
 git pull origin develop
 ```
 
-Erwarteter Stand: Merge `4a1d350c96` (PR #3) liegt auf `develop`.
+`git log -1 --oneline` sollte Medusa 2.20.1 und den Seed-/Checkout-Fix enthalten.
 
 ## 2. `.env` prüfen
 
@@ -112,7 +112,17 @@ docker compose -f infra/compose.yaml --env-file .env exec medusa \
   sh -c 'cd /server/apps/backend && npx medusa exec ./src/scripts/seed.ts'
 ```
 
-Wenn die Warnung `No sales channel yet` kommt: einmal ins Admin einloggen (Schritt 5), Sales Channel existiert danach, Seed nochmal ausführen.
+Der Seed legt Region DE/EUR, Versand, Zahlungsanbieter und (einmalig) den Publishable Key an. In den Medusa-Logs nach `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_…` suchen.
+
+Wenn Katalogprodukte schon mit dem alten Seed (Beträge in Cent) existieren, Preise in Admin prüfen — Medusa erwartet Euro, nicht Cent. Zur Not die Shop-Produkte löschen und Seed nochmal laufen lassen (Komponenten bleiben).
+
+Stripe-Billing-Webhook (Miete), zusätzlich zum Medusa-Payment-Hook:
+
+```text
+http://DEINE-IP:9000/hooks/stripe-billing
+```
+
+Events: `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.deleted`. Secret nach `STRIPE_BILLING_WEBHOOK_SECRET` oder `STRIPE_WEBHOOK_SECRET`.
 
 ## 5. Admin und Publishable Key
 

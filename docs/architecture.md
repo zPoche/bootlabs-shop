@@ -6,7 +6,7 @@
 
 | Thema | Entscheidung |
 | --- | --- |
-| Shop-Engine | Medusa v2 als npm-Dependency, aktuell **2.19.0** |
+| Shop-Engine | Medusa v2 als npm-Dependency, aktuell **2.20.1** |
 | App-Layout | offizielle create-medusa-app / [dtc-starter](https://github.com/medusajs/dtc-starter)-Struktur |
 | Backend | `apps/backend` (`@bootlabs/backend`) |
 | Storefront | offizieller Medusa Next.js Starter in `apps/storefront` |
@@ -58,7 +58,7 @@ Diese Bäume gehören zum Medusa-Upstream und werden hier nicht weiterentwickelt
 
 ### Übernommen
 
-- **Medusa-Version 2.19.0** als npm-Pin, identisch zum Fork-Stand
+- **Medusa-Version 2.20.1** als npm-Pin (Fork-Stand war 2.19.0, danach Dependency-Update)
 - **Lizenztexte** nach `docs/licenses/` (MIT, Enterprise-Hinweis, Security-Policy)
 - **Offizielle App-Konventionen** aus [medusajs/dtc-starter](https://github.com/medusajs/dtc-starter) (MIT): `apps/backend`, `apps/storefront`, `medusa-config.ts`, `src/{api,admin,workflows,modules,subscribers,jobs,links}`
 
@@ -119,7 +119,7 @@ Plugins werden erst registriert, wenn sie echte Module und Tests haben. Leere Pl
 
 ## Mietmodell
 
-Mietanfragen liegen im Modul `rental` und in der Admin-Ansicht „Miete“. Kauf bleibt der Hauptweg. Stripe Billing für Monatsraten braucht dieselben Stripe-Keys.
+Mietanfragen liegen im Modul `rental` und in der Admin-Ansicht „Miete“. Freigabe erzeugt bei gesetztem `STRIPE_SECRET_KEY` eine Stripe-Checkout-Session im Abo-Modus. Webhook: `POST /hooks/stripe-billing` (`invoice.paid`, `invoice.payment_failed`, `customer.subscription.deleted`). Kauf bleibt der Hauptweg.
 
 ## Risiken der Core-Fork-Migration
 

@@ -89,7 +89,7 @@ RentalContract
 RentalEvent
 ```
 
-Siehe Modul `rental`. Mietanfragen werden persistiert. Stripe Billing für Monatsraten braucht die Stripe-Keys.
+Siehe Modul `rental`. Mietanfragen werden persistiert. Admin-Freigabe kann ein Stripe-Abo anlegen; Webhooks aktualisieren den Vertrag.
 
 ## Medusa-Nutzung
 

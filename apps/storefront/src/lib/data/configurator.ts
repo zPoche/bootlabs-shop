@@ -4,7 +4,6 @@ import {
   COMPONENT_CATALOG,
   CUSTOM_BUILD_HANDLE,
   SYSTEM_PRESETS,
-  snapshotFromIds,
   type ConfigurationSnapshot,
 } from "@bootlabs/configurator"
 import { sdk } from "@lib/config"
@@ -72,7 +71,9 @@ export async function createConfiguration(
     })
     return payload.configuration
   } catch {
-    return snapshotFromIds(`local_${Date.now()}`, componentIds)
+    throw new Error(
+      "Konfiguration konnte serverseitig nicht geprüft werden. Seed und Publishable Key prüfen."
+    )
   }
 }
 

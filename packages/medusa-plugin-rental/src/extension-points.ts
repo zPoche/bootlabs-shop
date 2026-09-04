@@ -44,7 +44,7 @@ export type RentalEvent = {
 }
 
 export const RENTAL_NOT_IMPLEMENTED =
-  "Stripe Billing for rentals is optional. One-time Stripe checkout is the shop path."
+  "Rental requests and Stripe Billing checkout are implemented in apps/backend."
 
 export function assertRentalNotImplemented(): never {
   throw new Error(RENTAL_NOT_IMPLEMENTED)

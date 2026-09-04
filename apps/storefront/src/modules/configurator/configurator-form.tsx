@@ -101,6 +101,7 @@ export default function ConfiguratorForm({
         quantity: 1,
         countryCode,
         metadata: { configuration_id: created.id },
+        unitPrice: created.calculatedPriceCents / 100,
       })
       setMessage("Geprüft und in den Warenkorb gelegt.")
     } catch (error) {

@@ -11,7 +11,7 @@ export type BuildOrderState =
   | "ready_to_ship"
   | "shipped"
 
-const STATES: BuildOrderState[] = [
+export const BUILD_STATES: BuildOrderState[] = [
   "queued",
   "parts_reserved",
   "assembling",
@@ -21,12 +21,22 @@ const STATES: BuildOrderState[] = [
   "shipped",
 ]
 
+export function nextBuildState(
+  state: string
+): BuildOrderState | null {
+  const index = BUILD_STATES.indexOf(state as BuildOrderState)
+  if (index < 0 || index === BUILD_STATES.length - 1) {
+    return null
+  }
+  return BUILD_STATES[index + 1]
+}
+
 class OperationsModuleService extends MedusaService({
   BuildOrder,
   RmaCase,
 }) {
   async advanceBuildOrder(id: string, state: BuildOrderState) {
-    if (!STATES.includes(state)) {
+    if (!BUILD_STATES.includes(state)) {
       throw new Error(`Ungültiger Build-Status: ${state}`)
     }
 

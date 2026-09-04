@@ -37,7 +37,7 @@
 
 Store- und Admin-APIs von Medusa (`/store/*`, `/admin/*`) sind über die Dependency verfügbar, sobald die Datenbank migriert ist. Sie sind um Bootlabs-Konfigurator, Systeme und Admin-Queues erweitert.
 
-## Phase 1–3 (umgesetzt)
+## Phase 1–4 (umgesetzt)
 
 | Vertrag | Beschreibung |
 | --- | --- |
@@ -45,47 +45,19 @@ Store- und Admin-APIs von Medusa (`/store/*`, `/admin/*`) sind über die Depende
 | `GET /store/components` | Komponentenstamm |
 | `POST /store/configurations` | Snapshot anlegen, serverseitig bepreisen und prüfen |
 | `POST /store/configurations/:id/validate` | Revalidierung |
-| Cart-Line-Item | `configuration_id` im Metadata |
-| Admin | Build Queue, Konfigurator, Geräte, RMA |
+| Cart-Line-Item | `configuration_id` + serverseitiger `unit_price` |
+| Medusa Store Products / Cart / Checkout | Einmalkauf, Stripe wenn Key gesetzt |
+| `POST /store/rentals` | Mietanfrage |
+| `POST /admin/rentals/:id/approve` | Freigabe, optional Stripe-Abo-Checkout |
+| `POST /hooks/stripe-billing` | `invoice.paid`, `invoice.payment_failed`, `customer.subscription.*` |
+| Admin | Build Queue (Status weiter), Konfigurator, Geräte, RMA, Miete |
 
-## Geplant Phase 1 (Rest)
+Kauf-Webhooks für Karten laufen über Medusas Stripe-Provider (`/hooks/payment/stripe_stripe`), sobald `STRIPE_WEBHOOK_SECRET` gesetzt ist.
 
-| Vertrag | Beschreibung |
-| --- | --- |
-| Medusa Store Products | PLAY/CREATE/REFRESH + Zubehör |
-| Medusa Store Cart / Checkout | Einmalkauf |
-| Stripe Payment Session | Testmodus, Keys aus Env |
-| Admin Build Queue | offene `BuildOrder`s |
-| Storefront-Seiten | `/gaming-pcs`, Warenkorb, Bestellbestätigung |
-
-Stripe-Webhooks (Phase 1, signaturgeprüft, idempotent):
-
-- `checkout.session.completed`
-- `payment_intent.succeeded`
-- `payment_intent.payment_failed`
-- `charge.refunded`
-
-## Geplant Phase 2
-
-| Vertrag | Beschreibung |
-| --- | --- |
-| `POST /store/configurations` | Snapshot anlegen, serverseitig bepreisen und prüfen |
-| `POST /store/configurations/:id/validate` | Revalidierung |
-| Cart-Line-Item | `configuration_id` im Metadata |
-| Admin Configurator | Komponenten, Regeln, Preisfreigabe |
-
-Client-Preise sind Vorschau. `assertServerAuthoritative` in `@bootlabs/configurator` erzwingt das kontraktuell.
-
-## Geplant Phase 4 (blockiert)
-
-Keine öffentlichen Miet-Endpunkte. Stripe-Billing-Webhooks erst nach Freigabe:
-
-- `invoice.paid`
-- `invoice.payment_failed`
-- `customer.subscription.*`
+Client-Preise sind Vorschau. Checkout revalidiert die Konfiguration serverseitig.
 
 ## Auth und Keys
 
-- Storefront-Aufrufe an Medusa brauchen später einen Publishable API Key (`NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY`).
-- Admin braucht einen User (`pnpm --filter @bootlabs/backend user`).
+- Storefront-Aufrufe an Medusa brauchen den Publishable API Key (`NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY`). Der Seed legt einen an und loggt ihn einmal.
+- Admin braucht einen User (Compose-Bootstrap oder `pnpm --filter @bootlabs/backend user`).
 - Keine Stripe-Secret-Keys im Browser.
