@@ -124,6 +124,7 @@ Keine Live-Keys (`sk_live_` / `pk_live_`), solange ihr testet. Das Secret kommt 
 - [docs/domain-model.md](docs/domain-model.md) — geplante Domäne inkl. Phase 1/2
 - [docs/api-contracts.md](docs/api-contracts.md) — vorhandene und geplante APIs
 - [docs/runbook.md](docs/runbook.md) — Betrieb, Logs, Backups, Deployment
+- [docs/server-update.md](docs/server-update.md) — Shop auf der VM aktualisieren
 - [docs/medusa-update-process.md](docs/medusa-update-process.md) — Dependency-Updates
 
 ## Was bewusst nicht enthalten ist

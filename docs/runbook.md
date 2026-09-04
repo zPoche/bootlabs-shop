@@ -90,7 +90,16 @@ pnpm --filter @bootlabs/backend db:migrate
 
 Nach Medusa-Updates zuerst Release Notes, dann dieselbe Command. Rollback nur modulweise mit `medusa db:rollback <module>` — siehe Update-Prozess.
 
-Phase-0-Seed ist leer. Kein Demo-Katalog.
+Katalog-Seed (Komponenten, Regeln, PLAY/CREATE/REFRESH, Custom, WLAN, Setup):
+
+```bash
+docker compose -f infra/compose.yaml --env-file .env exec medusa \
+  sh -c 'cd /server/apps/backend && npx medusa exec ./src/scripts/seed.ts'
+```
+
+Oder lokal: `pnpm --filter @bootlabs/backend seed`. Vorhandene Einträge werden übersprungen.
+
+Server-Update Schritt für Schritt: [server-update.md](server-update.md).
 
 ## Logs
 
