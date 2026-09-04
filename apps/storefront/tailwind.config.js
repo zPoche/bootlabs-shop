@@ -21,17 +21,21 @@ module.exports = {
       },
       colors: {
         grey: {
-          0: "#FFFFFF",
-          5: "#F9FAFB",
-          10: "#F3F4F6",
-          20: "#E5E7EB",
-          30: "#D1D5DB",
-          40: "#9CA3AF",
-          50: "#6B7280",
-          60: "#4B5563",
-          70: "#374151",
-          80: "#1F2937",
-          90: "#111827",
+          0: "#0A0B0D",
+          5: "#0E0F17",
+          10: "#12131C",
+          20: "#1C1E28",
+          30: "#3A3D4A",
+          40: "#6E7480",
+          50: "#9AA0AE",
+          60: "#C4C9D4",
+          70: "#E4E6EC",
+          80: "#F4F6F5",
+          90: "#FFFFFF",
+        },
+        accent: {
+          DEFAULT: "#7C5CFF",
+          soft: "#CFC4FF",
         },
       },
       borderRadius: {
@@ -59,15 +63,13 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          "Inter",
-          "-apple-system",
-          "BlinkMacSystemFont",
+          "var(--font-body)",
+          "Space Grotesk",
           "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Ubuntu",
           "sans-serif",
         ],
+        display: ["var(--font-display)", "Archivo", "Segoe UI", "sans-serif"],
+        mono: ["var(--font-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
       },
       keyframes: {
         ring: {

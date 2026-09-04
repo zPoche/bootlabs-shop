@@ -1,8 +1,8 @@
 :root {
-  --bootlabs-bg: #e8eef2;
-  --bootlabs-fg: #102027;
-  --bootlabs-muted: #4a5b64;
-  --bootlabs-accent: #0b6b5a;
-  --bootlabs-surface: rgba(255, 255, 255, 0.42);
-  --bootlabs-line: rgba(16, 32, 39, 0.12);
+  --bootlabs-bg: #0a0b0d;
+  --bootlabs-fg: #f4f6f5;
+  --bootlabs-muted: #9aa0ae;
+  --bootlabs-accent: #7c5cff;
+  --bootlabs-surface: #0e0f17;
+  --bootlabs-line: rgba(255, 255, 255, 0.07);
 }
