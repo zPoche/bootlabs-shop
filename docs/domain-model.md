@@ -1,8 +1,6 @@
 # Domänenmodell
 
-Phase 0 persistiert noch keine Bootlabs-Entitäten. Medusa bringt eigene Modelle für Produkte, Warenkorb, Bestellung, Kunde, Zahlung mit.
-
-Die folgenden Modelle sind die Ziel-Domäne. Implementierung erst in der genannten Phase.
+Phase 1–3 persistieren Bootlabs-Entitäten in den lokalen Modulen `configurator`, `operations` und `devices`. Medusa bleibt Quelle für Katalog, Warenkorb, Bestellung, Kunde und Zahlung.
 
 ## Phase 1 — Kauf und Build
 
@@ -55,7 +53,7 @@ PcConfiguration
 - expires_at
 ```
 
-Typen und Regelkatalog liegen in `@bootlabs/configurator`. Die Engine ist in Phase 0 ein Stub (`engine: "planned"`).
+Typen und Regelkatalog liegen in `@bootlabs/configurator`. Die Engine ist aktiv (`engine: "active"`).
 
 Pflichtregeln:
 

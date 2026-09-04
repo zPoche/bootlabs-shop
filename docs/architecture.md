@@ -93,10 +93,10 @@ Caddy und Cloudflare sitzen später vor den HTTP-Ports.
 | `@bootlabs/backend` | offizielle Medusa-v2-App | ja, Runtime |
 | `@bootlabs/storefront` | offizieller Next.js Storefront | ja, Runtime |
 | `@bootlabs/ui` | Tokens | später Storefront/Admin |
-| `@bootlabs/configurator` | Typen, Regelkatalog, Preisvertrag | nein, Fachbibliothek |
-| `@bootlabs/medusa-plugin-configurator` | Phase-2-Skelett | nein |
-| `@bootlabs/medusa-plugin-devices` | Phase-3-Skelett | nein |
-| `@bootlabs/medusa-plugin-operations` | Phase-1-Skelett BuildOrder | nein |
+| `@bootlabs/configurator` | Typen, Regelkatalog, aktive Engine | ja, Fachbibliothek |
+| `@bootlabs/medusa-plugin-configurator` | Status/Vertrag Phase 2 | Modul in der App |
+| `@bootlabs/medusa-plugin-devices` | Status/Vertrag Phase 3 | Modul in der App |
+| `@bootlabs/medusa-plugin-operations` | Status/Vertrag Phase 1 | Modul in der App |
 | `@bootlabs/medusa-plugin-rental` | nur Erweiterungspunkte | nein, blockiert |
 
 Plugins werden erst registriert, wenn sie echte Module und Tests haben. Leere Plugins in `medusa-config.ts` würden nur Update-Risiko erzeugen.
@@ -109,20 +109,13 @@ Plugins werden erst registriert, wenn sie echte Module und Tests haben. Leere Pl
 - Webhooks später signaturgeprüft und idempotent
 - Uploads später S3-kompatibel, nicht ins Container-Dateisystem
 
-## Phase 1 — vorbereitet, nicht umgesetzt
+## Phase 1–3 — umgesetzt
 
-Nach Freigabe:
-
-- Bootlabs-Shop-Design auf dem offiziellen Storefront
-- Katalog, Kategorien, fünf Standard-PCs, Zubehör, Services
-- Stripe-Einmalzahlung im Testmodus
-- Bestell-Workflow und BuildOrder
-- Admin-Build-Queue
-- Plugin `operations` registrieren
-
-## Phase 2 — nur geplant
-
-Konfigurator mit den Pflichtregeln in `@bootlabs/configurator` `RULE_CATALOG`. Snapshot, Warenkorb-`configuration_id`, Revalidierung vor Checkout. Keine KI-Teileauswahl.
+- Fünf Standard-PCs, Zubehör, Service, Custom-Build
+- Konfigurator mit Pflichtregeln, Snapshot und Warenkorb-`configuration_id`
+- BuildOrder bei `order.placed`, Admin-Build-Queue
+- Geräte und RMA
+- Stripe-Testmodus, sobald `STRIPE_SECRET_KEY` gesetzt ist
 
 ## Mietmodell — nicht implementiert
 

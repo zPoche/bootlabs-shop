@@ -10,6 +10,8 @@ export const shopContent = {
       "Vorkonfigurierte und frei konfigurierbare Gaming-PCs, Zubehör und Service — gebaut und betreut von Bootlabs.",
   },
   nav: [
+    { label: "Gaming-PCs", href: "/gaming-pcs" },
+    { label: "Konfigurator", href: "/konfigurator" },
     { label: "Shop", href: "/store" },
     { label: "Konto", href: "/account" },
   ],
@@ -29,8 +31,8 @@ export const shopContent = {
     line2: "Gebaut, getestet, geliefert.",
     support:
       "Vorkonfigurierte Systeme oder frei zusammengestellt. Festpreis nach Konfiguration, Versand in Deutschland, Ansprechpartner statt Ticketschlange.",
-    primaryCta: { label: "Zum Shop", href: "/store" },
-    secondaryCta: { label: "Konto", href: "/account" },
+    primaryCta: { label: "Gaming-PCs", href: "/gaming-pcs" },
+    secondaryCta: { label: "Konfigurator", href: "/konfigurator" },
     facts: [
       "Konfiguriert in Deutschland",
       "Festpreis nach Auswahl",
@@ -40,13 +42,13 @@ export const shopContent = {
       title: "bootlabs@shop: ~",
       command: "bootlabs shop status",
       rows: [
-        { label: "gaming-pcs", value: "in vorbereitung" },
-        { label: "zubehör", value: "in vorbereitung" },
+        { label: "gaming-pcs", value: "verfügbar" },
+        { label: "zubehör", value: "verfügbar" },
         { label: "servicepakete", value: "verfügbar" },
-        { label: "konfigurator", value: "folgt" },
+        { label: "konfigurator", value: "aktiv" },
       ],
-      loadLabel: "katalog diese woche",
-      loadHint: "phase 0 · fundament",
+      loadLabel: "katalog live",
+      loadHint: "phase 3 · konfigurator",
     },
   },
   ticker: [

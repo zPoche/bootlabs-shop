@@ -14,7 +14,7 @@ Bootlabs-Fachlogik liegt nur in lokalen Plugins und Modulen unter `packages/`.
 4. Eigener Konfigurator mit serverseitiger Kompatibilität und Preiskalkulation
 5. Geräte-Lebenszyklus: Seriennummer, Build, Burn-in, Versand, RMA, Refurbishment
 
-Phase 0 (dieses Release) liefert nur das technische Fundament. Phase 1 startet erst nach Freigabe.
+Phase 1–3 sind im Shop umgesetzt: Katalog, Konfigurator, Build-Queue, Geräte/RMA. Miete bleibt blockiert.
 
 ## Struktur
 
@@ -117,10 +117,14 @@ Nur Testmodus. In `.env` die Platzhalter `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABL
 - [docs/runbook.md](docs/runbook.md) — Betrieb, Logs, Backups, Deployment
 - [docs/medusa-update-process.md](docs/medusa-update-process.md) — Dependency-Updates
 
-## Was Phase 0 bewusst nicht enthält
+## Was bewusst nicht enthalten ist
 
-- Produktkatalog und die fünf PLAY/CREATE/REFRESH-Modelle
-- Warenkorb, Checkout, Stripe-Zahlung
-- funktionierenden Konfigurator
-- Mietvertrag, Bonität, Kaufoption
+- Mietvertrag, Bonität, Kaufoption (Phase 4, blockiert)
 - Änderungen am Medusa-Core
+
+Nach dem Deploy:
+
+```bash
+pnpm --filter @bootlabs/backend db:migrate
+pnpm --filter @bootlabs/backend seed
+```

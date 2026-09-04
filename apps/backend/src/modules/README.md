@@ -1,6 +1,9 @@
 # Local Medusa modules
 
-Bootlabs-Fachlogik gehört in die Workspace-Plugins unter `packages/medusa-plugin-*`, nicht in den Medusa-Core.
+Bootlabs-Module in dieser App:
 
-Dieses Verzeichnis bleibt für app-lokale Module, die sich nicht als Plugin teilen lassen.
-Phase 0 enthält keine Module.
+- `configurator` — Komponenten, Regeln, PC-Konfigurationen
+- `operations` — BuildOrder und RMA
+- `devices` — Geräte-Lebenszyklus
+
+Miete bleibt ein blockierter Erweiterungspunkt in `@bootlabs/medusa-plugin-rental`.

@@ -1,6 +1,6 @@
 # @bootlabs/medusa-plugin-operations
 
-Phase 1 beginnt mit BuildOrder und einer Admin-Build-Queue.
-Phase 3 ergänzt QC, Burn-in, Versand, RMA und Refurbishment.
+BuildOrder und RMA liegen in `apps/backend/src/modules/operations`.
 
-Noch nicht in Medusa registriert.
+- Subscriber `order.placed` legt eine BuildOrder an
+- Admin: Build Queue und RMA

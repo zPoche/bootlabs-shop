@@ -42,6 +42,30 @@ module.exports = defineConfig({
     },
     ...(cookieOptions ? { cookieOptions } : {}),
   },
+  modules: [
+    { resolve: "./src/modules/configurator" },
+    { resolve: "./src/modules/operations" },
+    { resolve: "./src/modules/devices" },
+    ...(process.env.STRIPE_SECRET_KEY
+      ? [
+          {
+            resolve: "@medusajs/medusa/payment",
+            options: {
+              providers: [
+                {
+                  resolve: "@medusajs/medusa/payment-stripe",
+                  id: "stripe",
+                  options: {
+                    apiKey: process.env.STRIPE_SECRET_KEY,
+                    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+                  },
+                },
+              ],
+            },
+          },
+        ]
+      : []),
+  ],
   admin: {
     vite: (config) => ({
       ...config,
@@ -56,8 +80,7 @@ module.exports = defineConfig({
     }),
   },
   plugins: [
-    // Phase 1+: register @bootlabs/medusa-plugin-configurator,
-    // @bootlabs/medusa-plugin-devices, @bootlabs/medusa-plugin-operations.
-    // Phase 4: register @bootlabs/medusa-plugin-rental after legal review.
+    // Domain modules live in apps/backend/src/modules.
+    // Phase 4 rental stays unregistered until legal review.
   ],
 })

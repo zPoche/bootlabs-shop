@@ -16,7 +16,7 @@
 {
   "ok": true,
   "service": "bootlabs-medusa",
-  "phase": 0,
+  "phase": 3,
   "commerceEngine": "medusa-v2-dependency",
   "stripeMode": "test-keys-reserved"
 }
@@ -28,16 +28,27 @@
 {
   "ok": true,
   "service": "bootlabs-storefront",
-  "phase": 0,
+  "phase": 3,
   "medusaBackendUrl": "http://localhost:9000"
 }
 ```
 
 `GET /store/health` und alle übrigen `/store/*`-Routen verlangen den Medusa-Header `x-publishable-api-key`. Compose-Healthchecks nutzen `GET /health` und `GET /api/health`, die ohne Key antworten.
 
-Store- und Admin-APIs von Medusa (`/store/*`, `/admin/*`) sind über die Dependency verfügbar, sobald die Datenbank migriert ist. Sie werden in Phase 0 nicht um Bootlabs-Katalogdaten erweitert.
+Store- und Admin-APIs von Medusa (`/store/*`, `/admin/*`) sind über die Dependency verfügbar, sobald die Datenbank migriert ist. Sie sind um Bootlabs-Konfigurator, Systeme und Admin-Queues erweitert.
 
-## Geplant Phase 1
+## Phase 1–3 (umgesetzt)
+
+| Vertrag | Beschreibung |
+| --- | --- |
+| `GET /store/systems` | PLAY/CREATE/REFRESH-Presets |
+| `GET /store/components` | Komponentenstamm |
+| `POST /store/configurations` | Snapshot anlegen, serverseitig bepreisen und prüfen |
+| `POST /store/configurations/:id/validate` | Revalidierung |
+| Cart-Line-Item | `configuration_id` im Metadata |
+| Admin | Build Queue, Konfigurator, Geräte, RMA |
+
+## Geplant Phase 1 (Rest)
 
 | Vertrag | Beschreibung |
 | --- | --- |

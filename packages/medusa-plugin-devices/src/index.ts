@@ -11,7 +11,7 @@ export type DeviceCondition =
 export const pluginStatus = {
   id: pluginId,
   phase: 3,
-  registeredInMedusa: false,
+  registeredInMedusa: true,
   plannedEntities: ["Device"],
   plannedFields: [
     "asset_tag",

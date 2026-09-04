@@ -1,6 +1,5 @@
 # @bootlabs/medusa-plugin-devices
 
-Phase-3-Plugin. Noch nicht registriert.
+Geräte liegen in `apps/backend/src/modules/devices`.
 
-Geplant: Geräte, Seriennummern, Zustandsprotokolle, Fotos, Garantieende.
 Kein Mietprozess in diesem Paket.

@@ -28,6 +28,7 @@
     "user": "medusa user"
   },
   "dependencies": {
+    "@bootlabs/configurator": "workspace:*",
     "@medusajs/admin-sdk": "2.19.0",
     "@medusajs/admin-shared": "2.19.0",
     "@medusajs/caching": "2.19.0",
