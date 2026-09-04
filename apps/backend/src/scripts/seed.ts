@@ -7,11 +7,14 @@ import {
 import type { ExecArgs } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
 import { createProductsWorkflow } from "@medusajs/medusa/core-flows"
+import { medusaAmountFromCents } from "../lib/money"
 import { CONFIGURATOR_MODULE } from "../modules/configurator"
 import type ConfiguratorModuleService from "../modules/configurator/service"
+import { seedCommerce } from "./seed-commerce"
 
 export default async function seed({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
+  const { salesChannel, shippingProfile } = await seedCommerce({ container })
   const configurator: ConfiguratorModuleService =
     container.resolve(CONFIGURATOR_MODULE)
 
@@ -58,14 +61,6 @@ export default async function seed({ container }: ExecArgs) {
     logger.info(`Seeded ${RULE_CATALOG.length} compatibility rules.`)
   }
 
-  const salesChannel = container.resolve(Modules.SALES_CHANNEL)
-  const [channels] = await salesChannel.listAndCountSalesChannels()
-  const defaultChannel = channels[0]
-  if (!defaultChannel) {
-    logger.warn("No sales channel yet. Create one in Admin, then re-run seed.")
-    return
-  }
-
   const productModule = container.resolve(Modules.PRODUCT)
   const [existingProducts] = await productModule.listAndCountProducts({
     handle: [
@@ -85,6 +80,7 @@ export default async function seed({ container }: ExecArgs) {
       handle: system.handle,
       description: `${system.tagline} Ziel: ${system.targetResolution}. Lieferzeit ca. ${system.leadTimeDays} Werktage.`,
       status: "published" as const,
+      shipping_profile_id: shippingProfile.id,
       options: [{ title: "Variante", values: ["Standard"] }],
       metadata: {
         bootlabs_system: system.id,
@@ -93,13 +89,18 @@ export default async function seed({ container }: ExecArgs) {
         highlights: system.highlights.join(" · "),
         component_ids: system.componentIds.join(","),
       },
-      sales_channels: [{ id: defaultChannel.id }],
+      sales_channels: [{ id: salesChannel.id }],
       variants: [
         {
           title: "Standard",
           sku: system.id.toUpperCase(),
           options: { Variante: "Standard" },
-          prices: [{ amount: system.priceCents, currency_code: "eur" }],
+          prices: [
+            {
+              amount: medusaAmountFromCents(system.priceCents),
+              currency_code: "eur",
+            },
+          ],
           manage_inventory: false,
         },
       ],
@@ -110,9 +111,10 @@ export default async function seed({ container }: ExecArgs) {
       description:
         "Frei konfigurierter Gaming-PC. Preis und Kompatibilität kommen aus dem Konfigurator.",
       status: "published" as const,
+      shipping_profile_id: shippingProfile.id,
       options: [{ title: "Variante", values: ["Konfiguriert"] }],
       metadata: { bootlabs_custom: "true" },
-      sales_channels: [{ id: defaultChannel.id }],
+      sales_channels: [{ id: salesChannel.id }],
       variants: [
         {
           title: "Konfiguriert",
@@ -128,14 +130,20 @@ export default async function seed({ container }: ExecArgs) {
       handle: "bootlabs-wifi-modul",
       description: "WLAN und Bluetooth zum Nachrüsten.",
       status: "published" as const,
+      shipping_profile_id: shippingProfile.id,
       options: [{ title: "Variante", values: ["Standard"] }],
-      sales_channels: [{ id: defaultChannel.id }],
+      sales_channels: [{ id: salesChannel.id }],
       variants: [
         {
           title: "Standard",
           sku: "ACC-WIFI-KIT",
           options: { Variante: "Standard" },
-          prices: [{ amount: 3900, currency_code: "eur" }],
+          prices: [
+            {
+              amount: medusaAmountFromCents(3900),
+              currency_code: "eur",
+            },
+          ],
           manage_inventory: false,
         },
       ],
@@ -145,14 +153,20 @@ export default async function seed({ container }: ExecArgs) {
       handle: "bootlabs-setup-service",
       description: "Wir richten das System ein und übernehmen deine Daten.",
       status: "published" as const,
+      shipping_profile_id: shippingProfile.id,
       options: [{ title: "Variante", values: ["Standard"] }],
-      sales_channels: [{ id: defaultChannel.id }],
+      sales_channels: [{ id: salesChannel.id }],
       variants: [
         {
           title: "Standard",
           sku: "SVC-SETUP",
           options: { Variante: "Standard" },
-          prices: [{ amount: 8900, currency_code: "eur" }],
+          prices: [
+            {
+              amount: medusaAmountFromCents(8900),
+              currency_code: "eur",
+            },
+          ],
           manage_inventory: false,
         },
       ],

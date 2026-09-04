@@ -119,11 +119,13 @@ export async function addToCart({
   quantity,
   countryCode,
   metadata,
+  unitPrice,
 }: {
   variantId: string
   quantity: number
   countryCode: string
   metadata?: Record<string, unknown>
+  unitPrice?: number
 }) {
   if (!variantId) {
     throw new Error("Missing variant ID when adding to cart")
@@ -146,6 +148,7 @@ export async function addToCart({
         variant_id: variantId,
         quantity,
         ...(metadata ? { metadata } : {}),
+        ...(typeof unitPrice === "number" ? { unit_price: unitPrice } : {}),
       },
       {},
       headers

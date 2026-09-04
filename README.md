@@ -2,7 +2,7 @@
 
 Deutschsprachiger Gaming-PC-Systemintegrator. Dieses Repository ist die **Bootlabs-Commerce-Anwendung**, kein gepflegter Medusa-Core-Fork.
 
-Die Basis ist die offizielle [create-medusa-app](https://docs.medusajs.com/learn/installation) / [dtc-starter](https://github.com/medusajs/dtc-starter)-Struktur: Medusa-Backend und Next.js-Storefront als pnpm-Workspace. Medusa v2 kommt ausschließlich als versionierte npm-Dependency (`@medusajs/*` 2.19.0). Updates laufen über `package.json`, Migrationen und Tests — nie über `git merge upstream`.
+Die Basis ist die offizielle [create-medusa-app](https://docs.medusajs.com/learn/installation) / [dtc-starter](https://github.com/medusajs/dtc-starter)-Struktur: Medusa-Backend und Next.js-Storefront als pnpm-Workspace. Medusa v2 kommt ausschließlich als versionierte npm-Dependency (`@medusajs/*` 2.20.1). Updates laufen über `package.json`, Migrationen und Tests — nie über `git merge upstream`.
 
 Bootlabs-Fachlogik liegt nur in lokalen Plugins und Modulen unter `packages/`.
 
@@ -14,7 +14,7 @@ Bootlabs-Fachlogik liegt nur in lokalen Plugins und Modulen unter `packages/`.
 4. Eigener Konfigurator mit serverseitiger Kompatibilität und Preiskalkulation
 5. Geräte-Lebenszyklus: Seriennummer, Build, Burn-in, Versand, RMA, Refurbishment
 
-Phase 1–3 sind im Shop umgesetzt: Katalog, Konfigurator, Build-Queue, Geräte/RMA. Miete bleibt blockiert.
+Phase 1–3 sind im Shop umgesetzt: Katalog, Konfigurator, Build-Queue, Geräte/RMA. Mietanfragen und Stripe-Billing-Freigabe liegen im Modul `rental`.
 
 ## Struktur
 

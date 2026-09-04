@@ -39,6 +39,7 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || "change-me-jwt-secret-dev-only",
       cookieSecret:
         process.env.COOKIE_SECRET || "change-me-cookie-secret-dev-only",
+      storeRelationsLimit: 4,
     },
     ...(cookieOptions ? { cookieOptions } : {}),
   },
