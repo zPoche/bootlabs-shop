@@ -31,7 +31,9 @@ git checkout develop
 git pull origin develop
 ```
 
-`git log -1 --oneline` sollte Medusa 2.20.1 und den Seed-/Checkout-Fix enthalten.
+`git log -1 --oneline` sollte den Docker-CLI-Fix enthalten (Medusa 2.20.1).
+
+Wenn `compose:up` mit `Cannot find module .../@medusajs/cli/cli.js` abbricht: `git pull` und nochmal bauen. Den Seed nicht gegen den alten laufenden Container ausführen — der loggt noch „Phase 0: no catalog seed“.
 
 ## 2. `.env` prüfen
 

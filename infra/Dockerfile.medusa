@@ -20,7 +20,9 @@ RUN pnpm install --frozen-lockfile
 
 FROM deps AS build
 COPY . .
-RUN pnpm --filter @bootlabs/backend build
+WORKDIR /server/apps/backend
+RUN node /server/node_modules/@medusajs/cli/cli.js build
+WORKDIR /server
 
 FROM base AS runner
 ENV NODE_ENV=production
